@@ -3,10 +3,10 @@
 Firmware that turns a LilyGO T-Encoder Pro into a USB media controller. It shows up in
 Windows as a keyboard with media keys, so no PC software is needed.
 
-| Menu   | Turn                    | Press       | Tap screen  |
-|--------|-------------------------|-------------|-------------|
-| Volume | volume up / down        | mute        | –           |
-| Media  | next / previous track   | play/pause  | play/pause  |
+| Menu   | Turn                    | Press       |
+|--------|-------------------------|-------------|
+| Volume | volume up / down        | mute        |
+| Media  | next / previous track   | play/pause  |
 
 Swipe left/right on the screen to switch menus.
 

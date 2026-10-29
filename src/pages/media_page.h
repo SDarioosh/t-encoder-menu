@@ -22,7 +22,6 @@ public:
         Hid::media(CONSUMER_CONTROL_PLAY_PAUSE);
         flash(PLAY);
     }
-    void onTap() override { onPress(); }
 
     void draw(Arduino_GFX &g, int cx, int cy, uint32_t now) override {
         float f = flashLevel(now);
