@@ -22,7 +22,7 @@ if ($Uninstall) {
 New-Item -ItemType Directory -Force $dir | Out-Null
 Copy-Item (Join-Path $PSScriptRoot 'knob-sync.ps1') $script -Force
 
-$launch = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$script`""
+$launch = "-NoProfile -MTA -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$script`""
 $lnk = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcut)
 $lnk.TargetPath = 'powershell.exe'
 $lnk.Arguments = $launch

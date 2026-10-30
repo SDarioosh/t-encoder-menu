@@ -11,6 +11,15 @@ param([switch]$Test)  # -Test: send once, print what happened, exit
 
 $ErrorActionPreference = 'Stop'
 
+# Windows only tells this process about a new default audio output (e.g. switching
+# speakers -> headphones) on an MTA thread. PowerShell defaults to STA, where we'd
+# keep reading the old output's volume, so relaunch in MTA mode if needed.
+if (-not $Test -and [Threading.Thread]::CurrentThread.GetApartmentState() -ne 'MTA') {
+    Start-Process powershell.exe -WindowStyle Hidden -ArgumentList `
+        "-NoProfile -MTA -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$PSCommandPath`""
+    exit
+}
+
 Add-Type -TypeDefinition @'
 using System;
 using System.Runtime.InteropServices;
@@ -118,7 +127,7 @@ $lastPortSearch = [DateTime]::MinValue
 while ($true) {
     $now = Get-Date
     try {
-        if (($now - $lastRefresh).TotalSeconds -ge 2) {
+        if (($now - $lastRefresh).TotalSeconds -ge 1) {
             [KnobAudio]::Refresh()
             $lastRefresh = $now
         }
